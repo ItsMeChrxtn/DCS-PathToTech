@@ -1,6 +1,17 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const getFallbackApiUrl = () => {
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return 'http://localhost:5000/api';
+    }
+  }
+
+  return 'https://dcs-pathtotech-2.onrender.com/api';
+};
+
+const API_URL = process.env.REACT_APP_API_URL || getFallbackApiUrl();
 
 const api = axios.create({
   baseURL: API_URL,
