@@ -13,16 +13,19 @@ const { ROLES, ACCOUNT_STATUS } = require('../config/constants');
 const register = async (req, res, next) => {
   try {
     const { email, password, firstName, lastName, role } = req.body;
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
+    const normalizedFirstName = typeof firstName === 'string' ? firstName.trim() : '';
+    const normalizedLastName = typeof lastName === 'string' ? lastName.trim() : '';
 
     // Validation
-    if (!email || !password || !firstName || !lastName) {
+    if (!normalizedEmail || !password || !normalizedFirstName || !normalizedLastName) {
       return res.status(400).json({
         success: false,
         message: 'Please provide all required fields',
       });
     }
 
-    if (!isValidEmail(email)) {
+    if (!isValidEmail(normalizedEmail)) {
       return res.status(400).json({
         success: false,
         message: 'Please provide a valid email',
@@ -30,7 +33,7 @@ const register = async (req, res, next) => {
     }
 
     // Check if user exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -40,10 +43,10 @@ const register = async (req, res, next) => {
 
     // Create user
     const user = new User({
-      email,
+      email: normalizedEmail,
       password,
-      firstName,
-      lastName,
+      firstName: normalizedFirstName,
+      lastName: normalizedLastName,
       role: role || ROLES.STUDENT,
       status: ACCOUNT_STATUS.ACTIVE,
     });
@@ -80,9 +83,10 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
 
     // Validation
-    if (!email || !password) {
+    if (!normalizedEmail || !password) {
       return res.status(400).json({
         success: false,
         message: 'Please provide email and password',
@@ -90,7 +94,7 @@ const login = async (req, res, next) => {
     }
 
     // Find user
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
       return res.status(401).json({
         success: false,

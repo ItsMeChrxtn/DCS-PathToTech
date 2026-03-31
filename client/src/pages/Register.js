@@ -42,10 +42,10 @@ const Register = () => {
 
     try {
       const response = await authAPI.register({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password.trim(),
         role: 'student',
       });
 

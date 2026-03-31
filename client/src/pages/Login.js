@@ -18,7 +18,10 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await authAPI.login({ email, password });
+      const response = await authAPI.login({
+        email: email.trim().toLowerCase(),
+        password: password.trim(),
+      });
       const { user, token } = response.data.data;
 
       login(user, token);
