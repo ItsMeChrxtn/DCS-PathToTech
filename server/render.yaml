@@ -14,7 +14,7 @@ services:
           property: connectionString
       - key: CORS_ORIGIN
         scope: all
-        value: https://pathtotech.vercel.app
+        value: https://client-eta-two-33.vercel.app,http://localhost:3000
       - key: JWT_SECRET
         scope: all
         value: your_jwt_secret_key_here
