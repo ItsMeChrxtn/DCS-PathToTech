@@ -5,14 +5,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap');
 
 :root {
-  --ptt-bg: #f7f3ef;
+  --ptt-bg: #f4eee8;
   --ptt-surface: #fffdf9;
   --ptt-surface-strong: #ffffff;
   --ptt-text: #231f20;
   --ptt-muted: #6d6761;
-  --ptt-primary: #7f1717;
+  --ptt-primary: #8e2017;
   --ptt-primary-strong: #5f1010;
+  --ptt-accent: #ff8f3f;
+  --ptt-accent-soft: #ffd9be;
   --ptt-border: #e5ddd7;
+}
+
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(142, 32, 23, 0.35); }
+  100% { box-shadow: 0 0 0 16px rgba(142, 32, 23, 0); }
 }
 
 @keyframes fadeIn {
@@ -46,6 +70,7 @@ body {
   background:
     radial-gradient(circle at 12% 10%, rgba(127, 23, 23, 0.1) 0, transparent 30%),
     radial-gradient(circle at 85% 0%, rgba(146, 96, 31, 0.09) 0, transparent 30%),
+    radial-gradient(circle at 90% 88%, rgba(255, 143, 63, 0.1) 0, transparent 30%),
     var(--ptt-bg);
 }
 
@@ -110,6 +135,48 @@ a {
     background: rgba(255, 255, 255, 0.82);
     border: 1px solid rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(12px);
+  }
+
+  .ptt-shell {
+    background:
+      radial-gradient(circle at 100% 0, rgba(255, 143, 63, 0.11) 0, transparent 30%),
+      radial-gradient(circle at 0 100%, rgba(142, 32, 23, 0.1) 0, transparent 28%),
+      linear-gradient(180deg, #f7f2ed 0%, #f2eae3 100%);
+  }
+
+  .logo-mark {
+    background: linear-gradient(140deg, #8f1f16 0%, #c64f2a 50%, #ff8f3f 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .logo-mark::after {
+    content: '';
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    left: -20%;
+    top: -80%;
+    transform: rotate(18deg);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0, rgba(255, 255, 255, 0.03) 65%);
+  }
+
+  .hero-card {
+    border: 1px solid rgba(159, 72, 38, 0.16);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 251, 246, 0.95) 100%);
+    box-shadow: 0 20px 40px rgba(80, 32, 26, 0.11);
+  }
+
+  .animated-entry {
+    animation: slideInUp 0.45s ease both;
+  }
+
+  .floating {
+    animation: floatY 4.5s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 1.8s ease-out infinite;
   }
 
   .bg-white.rounded-xl,

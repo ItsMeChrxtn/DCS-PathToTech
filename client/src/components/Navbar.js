@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import { useAuth } from '../hooks/useAuth';
 import Swal from 'sweetalert2';
+import BrandLogo from './BrandLogo';
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   const { user, logout, isAdmin, isStudent } = useAuth();
@@ -28,37 +29,31 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
   };
 
   return (
-    <nav className="sticky top-0 z-[1000] border-b border-white/20 bg-gradient-to-r from-[#4f0c0c] via-[#6f1414] to-[#8c2a1f] text-white shadow-premium">
-      <div className="px-4 sm:px-6 py-4 flex items-center justify-between">
+    <nav className="sticky top-0 z-[1000] border-b border-white/30 bg-gradient-to-r from-[#5a130f] via-[#7e2418] to-[#b04626] text-white shadow-premium backdrop-blur-sm">
+      <div className="px-4 sm:px-6 py-3.5 flex items-center justify-between">
         {/* Logo and title */}
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="w-11 h-11 bg-white/90 rounded-xl flex items-center justify-center shadow-md">
-            <span className="text-[#6f1414] font-extrabold text-lg tracking-tight">PT</span>
-          </div>
-          <div className="hidden sm:block">
-            <span className="block text-xl leading-tight font-extrabold tracking-tight">PathToTech</span>
-            <span className="block text-[11px] text-white/70 uppercase tracking-[0.2em]">Employability Intelligence</span>
-          </div>
+        <Link to="/" className="flex items-center">
+          <BrandLogo size="md" />
         </Link>
 
         {/* Right side - User menu and toggle */}
         <div className="flex items-center space-x-4">
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="text-right">
+            <div className="text-right leading-tight">
               <p className="text-sm font-semibold text-white">{user?.firstName}</p>
               <p className="text-[11px] uppercase tracking-[0.16em] text-white/70">{isAdmin ? 'Administrator' : 'Student'}</p>
             </div>
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition-smooth"
+                className="p-2.5 rounded-xl bg-white/12 hover:bg-white/25 transition-smooth"
               >
                 <FaUserCircle size={24} />
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-3 w-52 bg-white text-gray-800 rounded-xl shadow-premium border border-gray-100 overflow-hidden">
+                <div className="absolute right-0 mt-3 w-52 bg-white text-gray-800 rounded-xl shadow-premium border border-gray-100 overflow-hidden animated-entry">
                   <Link
                     to={isStudent ? '/student/profile' : isAdmin ? '/admin' : '/'}
                     className="block px-4 py-3 hover:bg-[#f8f3ee] font-medium"
@@ -81,7 +76,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
           {/* Mobile toggle */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="md:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition-smooth"
+            className="md:hidden p-2.5 rounded-xl bg-white/12 hover:bg-white/25 transition-smooth"
           >
             {sidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>

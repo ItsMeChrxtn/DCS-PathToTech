@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { authAPI } from '../services/api';
 import Swal from 'sweetalert2';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import BrandLogo from '../components/BrandLogo';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -74,14 +75,12 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 sm:p-8 flex items-center justify-center">
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-premium border border-[#e6dbd3] bg-white">
-        <div className="hidden lg:flex flex-col justify-between p-10 bg-gradient-to-br from-[#5a1010] via-[#7a1919] to-[#a03a25] text-white relative">
+    <div className="min-h-screen ptt-shell p-4 sm:p-8 flex items-center justify-center">
+      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-premium border border-[#e6dbd3] bg-white animated-entry">
+        <div className="hidden lg:flex flex-col justify-between p-10 bg-gradient-to-br from-[#4d1510] via-[#742215] to-[#af4727] text-white relative">
           <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 18% 22%, #ffffff 0, transparent 45%)' }} />
           <div className="relative">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/90 rounded-2xl mb-6">
-              <span className="text-[#6f1414] text-2xl font-extrabold">PT</span>
-            </div>
+            <BrandLogo size="lg" />
             <h1 className="text-4xl font-extrabold leading-tight mb-3">Create Your Account</h1>
             <p className="text-white/80 text-base leading-relaxed">Join PathToTech and start tracking your tech employability with algorithm-driven insights and recommendations.</p>
           </div>
@@ -93,9 +92,7 @@ const Register = () => {
 
         <div className="p-6 sm:p-10 lg:p-12 bg-[#fffdfa]">
           <div className="text-center lg:text-left mb-8">
-            <div className="inline-flex lg:hidden items-center justify-center w-14 h-14 bg-maroon rounded-xl mb-4">
-              <span className="text-white text-xl font-bold">PT</span>
-            </div>
+            <div className="inline-flex lg:hidden mb-4"><BrandLogo size="sm" dark /></div>
             <h2 className="text-3xl font-extrabold text-gray-800">Register as Student</h2>
             <p className="mt-2 text-gray-500">Set up your account in less than a minute</p>
           </div>
