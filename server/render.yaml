@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: pathtotech-server
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: pathtotech-db
+          property: connectionString
+      - key: CORS_ORIGIN
+        scope: all
+        value: https://pathtotech.vercel.app
+      - key: JWT_SECRET
+        scope: all
+        value: your_jwt_secret_key_here
+      - key: JWT_EXPIRE
+        scope: all
+        value: 7d
+      
+databases:
+  - name: pathtotech-db
+    databaseName: pathtotech
+    plan: free
+    region: singapore
