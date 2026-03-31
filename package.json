@@ -1,0 +1,9 @@
+{
+  "name": "dcs-pathtotech-root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm --prefix client run build",
+    "install:client": "npm --prefix client install"
+  }
+}

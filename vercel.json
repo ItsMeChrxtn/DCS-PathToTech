@@ -1,0 +1,25 @@
+{
+  "installCommand": "npm --prefix client install",
+  "buildCommand": "CI=false npm --prefix client run build",
+  "outputDirectory": "client/build",
+  "env": {
+    "REACT_APP_API_URL": "https://dcs-pathtotech-2.onrender.com/api"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
