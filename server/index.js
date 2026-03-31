@@ -61,21 +61,31 @@ app.use(errorHandler);
 // Database connection and server startup
 const PORT = process.env.PORT || 5000;
 
-const startServer = async () => {
+const runDatasetAutoImport = async () => {
+  console.log('Starting dataset auto-import...');
+
   try {
-    // Connect to database
+    await autoImportDatasets();
+    console.log('Dataset import completed');
+  } catch (error) {
+    console.error('Dataset import failed: ' + error.message);
+  }
+};
+
+const startServer = async () => {
+  console.log('Server starting...');
+
+  try {
+    console.log('Connecting to MongoDB...');
     await connectDB();
+    console.log('MongoDB connected');
 
-    // Auto-import datasets on startup
-    console.log('\n🔄 Scanning for datasets...');
-    const importResult = await autoImportDatasets();
-    console.log(`📊 Datasets: ${importResult.imported} imported, ${importResult.errors.length} errors\n`);
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log('Server running on port ' + PORT);
+      console.log('Environment: ' + (process.env.NODE_ENV || 'development'));
 
-    // Start server
-    app.listen(PORT, () => {
-      console.log(`\n✓ PathToTech server running on port ${PORT}`);
-      console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`Database: ${process.env.MONGODB_URI || 'mongodb://localhost:27017/pathtotech'}\n`);
+      // Run import after server is already listening so startup is not blocked.
+      void runDatasetAutoImport();
     });
   } catch (error) {
     console.error('✗ Failed to start server:', error.message);
